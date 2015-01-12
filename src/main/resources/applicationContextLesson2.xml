@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+				           http://www.springframework.org/schema/beans/spring-beans.xsd
+				           http://www.springframework.org/schema/util 
+				           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="dateFormat" class="java.text.SimpleDateFormat">  
+        <constructor-arg value="yyyy-MM-dd" />  
+    </bean>  
+    
+	<!-- 配置bean -->
+	<bean id="book" class="com.tutorial.spring.model.Book">
+		<property name="id" value="1"></property>
+		<property name="name" value="Hello World"></property>
+		<property name="price" value="100"></property>
+		<property name="releaseDate">
+			 <bean factory-bean="dateFormat" factory-method="parse">  
+                <constructor-arg value="2010-01-31" />  
+            </bean>  
+		</property>
+		<!-- bean的引用  -->
+		<property name="user" ref="user"></property>
+	</bean>
+	
+	<!-- 配置bean -->
+	<bean id="user" class="com.tutorial.spring.model.User">
+		<property name="id" value="1"></property>
+		<property name="name" value="Jimmy"></property>
+		<property name="age" value="27"></property>
+		<property name="address" value="中国无锡"></property>
+	</bean>
+</beans>
+
